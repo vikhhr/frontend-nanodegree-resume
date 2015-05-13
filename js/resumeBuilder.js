@@ -29,8 +29,7 @@ var bio = {
     skills: [
         "Analytical.", "Problem Solving.", "Team player.", "Flexibility.", "Adaptability.", "Creativity."
     ],
-    bioPic: "images/vhLogo.gif",
-    display: displayBio
+    bioPic: "images/vhLogo.gif"
 };
 
 // Work JSON definition
@@ -108,8 +107,7 @@ var work = {
             "Collaborated in database design and stored procedures implementation",
             "Implemented monitoring services for Unix and Linux servers."
         ]
-    }],
-    display: displayWork
+    }]
 };
 
 // Projects JSON definition
@@ -144,8 +142,7 @@ var projects = {
         dates: "August 2013",
         description: "Developed an online quiz for a research project titled What Parents Want: Education Preferences and Trade-offs.",
         images: []
-    }],
-    display: displayProjects
+    }]
 };
 
 // Education JSON definition
@@ -180,26 +177,25 @@ var education = {
         school: "Coursera: University of Maryland, College Park & Vanderbilt University",
         date: 2014,
         url: "https://www.coursera.org/specialization/mobilecloudcomputing2/36"
-    }],
-    display: displayEducation
+    }]
 };
 
 var map = {
-    display: displayMap
-}
+    title: "Google Map"
+};
 
 // --- DISPLAY FUNCTIONS ---
 
 // Function to build and display bio items.
-function displayBio() {
+bio.display = function() {
+    "use strict";
+
     // Creating name and role items from template and prepending them to the header
     var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
     var header = $("#header");
-    // $("#header").prepend(formattedRole);
     header.prepend(formattedRole);
 
     var formattedName = HTMLheaderName.replace("%data%", bio.name);
-    //$("#header").prepend(formattedName);
     header.prepend(formattedName);
 
     // Creating reference to avoid object property lookup repetition.
@@ -246,107 +242,123 @@ function displayBio() {
     var mySkills = bio.skills;
 
     for (var skill in mySkills) {
-        var mySkill = mySkills[skill];
+        if (mySkills.hasOwnProperty(skill)) {
+            var mySkill = mySkills[skill];
 
-        var formattedSkill = HTMLskills.replace("%data%", mySkill);
-        skillsUL.append(formattedSkill);
+            var formattedSkill = HTMLskills.replace("%data%", mySkill);
+            skillsUL.append(formattedSkill);
+        }
     }
 
     // Since the mockup shows the skills as a list instead of side by side I will change the display css property.
     skillsUL.css("display", "block");
-}
+};
 
 // Function to build and display work items.
-function displayWork() {
+work.display = function() {
+    "use strict";
+
     // Creating reference to avoid object property lookup repetition.
     var myJobs = work.jobs;
 
     for (var job in myJobs) {
-        var myJob = myJobs[job];
+        if (myJobs.hasOwnProperty(job)) {
+            var myJob = myJobs[job];
 
-        // Creating work experience div from template and adding it to the workExperience element
-        $("#workExperience").append(HTMLworkStart);
+            // Creating work experience div from template and adding it to the workExperience element
+            $("#workExperience").append(HTMLworkStart);
 
-        var formattedEmployer = HTMLworkEmployer.replace("%data%", myJob.employer);
-        var formattedTitle = HTMLworkTitle.replace("%data%", myJob.title);
-        $(".work-entry:last").append(formattedEmployer + formattedTitle);
+            var formattedEmployer = HTMLworkEmployer.replace("%data%", myJob.employer);
+            var formattedTitle = HTMLworkTitle.replace("%data%", myJob.title);
+            $(".work-entry:last").append(formattedEmployer + formattedTitle);
 
-        var formattedDates = HTMLworkDates.replace("%data%", myJob.dates);
-        $(".work-entry:last").append(formattedDates);
+            var formattedDates = HTMLworkDates.replace("%data%", myJob.dates);
+            $(".work-entry:last").append(formattedDates);
 
-        var formattedLocation = HTMLworkLocation.replace("%data%", myJob.location);
-        $(".work-entry:last").append(formattedLocation);
+            var formattedLocation = HTMLworkLocation.replace("%data%", myJob.location);
+            $(".work-entry:last").append(formattedLocation);
 
-        var descriptions = myJob.description;
+            var descriptions = myJob.description;
 
-        /*
+            /*
             Since I decided to use bullet points for my description (even though I still accept strings), I have to check
             the type of the content to correctly generate the description section for each job.
-        */
-        var description = descriptions.constructor === Array ? BULLET + descriptions.join(BR_BULLET) : descriptions;
-        var formattedDescription = HTMLworkDescription.replace("%data%", description);
-        $(".work-entry:last").append(formattedDescription);
+            */
+            var description = descriptions.constructor === Array ? BULLET + descriptions.join(BR_BULLET) : descriptions;
+            var formattedDescription = HTMLworkDescription.replace("%data%", description);
+            $(".work-entry:last").append(formattedDescription);
+        }
     }
-}
+};
 
 // Function to build and display project items.
-function displayProjects() {
+projects.display = function() {
+    "use strict";
+
     // Creating reference to avoid object property lookup repetition.
     var myProjects = projects.projects;
 
     for (var project in myProjects) {
-        var myProject = myProjects[project];
+        if (myProjects.hasOwnProperty(project)) {
+            var myProject = myProjects[project];
 
-        // Creating projects div from template and adding it to the projects element
-        $("#projects").append(HTMLprojectStart);
+            // Creating projects div from template and adding it to the projects element
+            $("#projects").append(HTMLprojectStart);
 
-        var formattedTitle = HTMLprojectTitle.replace("%data%", myProject.title);
-        $(".project-entry:last").append(formattedTitle);
+            var formattedTitle = HTMLprojectTitle.replace("%data%", myProject.title);
+            $(".project-entry:last").append(formattedTitle);
 
-        var formattedDates = HTMLprojectDates.replace("%data%", myProject.dates);
-        $(".project-entry:last").append(formattedDates);
+            var formattedDates = HTMLprojectDates.replace("%data%", myProject.dates);
+            $(".project-entry:last").append(formattedDates);
 
-        var formattedDescription = HTMLprojectDescription.replace("%data%", myProject.description);
-        $(".project-entry:last").append(formattedDescription);
+            var formattedDescription = HTMLprojectDescription.replace("%data%", myProject.description);
+            $(".project-entry:last").append(formattedDescription);
 
-        if (myProject.images.length > 0) {
-            var myProjectImages = myProject.images;
+            if (myProject.images.length > 0) {
+                var myProjectImages = myProject.images;
 
-            for (var projectImage in myProjectImages) {
-                var formattedImage = HTMLprojectImage.replace("%data%", myProjectImages[projectImage])
-                $(".project-entry:last").append(formattedImage);
+                for (var projectImage in myProjectImages) {
+                    if (myProjectImages.hasOwnProperty(projectImage)) {
+                        var formattedImage = HTMLprojectImage.replace("%data%", myProjectImages[projectImage]);
+                        $(".project-entry:last").append(formattedImage);
+                    }
+                }
             }
         }
     }
-}
+};
 
 // Function to build and display education items.
-function displayEducation() {
+education.display = function() {
+    "use strict";
+
     // Creating reference to avoid object property lookup repetition.
     var mySchools = education.schools;
 
     for (var school in mySchools) {
-        var mySchool = mySchools[school];
+        if (mySchools.hasOwnProperty(school)) {
+            var mySchool = mySchools[school];
 
-        // Creating education div from template and adding it to the projects element
-        $("#education").append(HTMLschoolStart);
+            // Creating education div from template and adding it to the projects element
+            $("#education").append(HTMLschoolStart);
 
-        var linkSchoolName = SCHOOL_NAME_LINK.replace("%url%", mySchool.url).replace("%data%", mySchool.name)
-        var formattedSchoolName = HTMLschoolName.replace("%data%", linkSchoolName);
-        var formattedSchoolDegree = HTMLschoolDegree.replace("%data%", mySchool.degree);
-        $(".education-entry:last").append(formattedSchoolName + formattedSchoolDegree);
+            var linkSchoolName = SCHOOL_NAME_LINK.replace("%url%", mySchool.url).replace("%data%", mySchool.name);
+            var formattedSchoolName = HTMLschoolName.replace("%data%", linkSchoolName);
+            var formattedSchoolDegree = HTMLschoolDegree.replace("%data%", mySchool.degree);
+            $(".education-entry:last").append(formattedSchoolName + formattedSchoolDegree);
 
-        var formattedSchoolDates = HTMLschoolDates.replace("%data%", mySchool.dates);
-        $(".education-entry:last").append(formattedSchoolDates);
+            var formattedSchoolDates = HTMLschoolDates.replace("%data%", mySchool.dates);
+            $(".education-entry:last").append(formattedSchoolDates);
 
-        var formattedSchoolLocation = HTMLschoolLocation.replace("%data%", mySchool.location);
-        $(".education-entry:last").append(formattedSchoolLocation);
+            var formattedSchoolLocation = HTMLschoolLocation.replace("%data%", mySchool.location);
+            $(".education-entry:last").append(formattedSchoolLocation);
 
-        var majors = mySchool.majors;
+            var majors = mySchool.majors;
 
-        if (majors.length > 0) {
-            var formattedSchoolMajor = HTMLschoolMajor.replace("%data%", mySchool.majors.join(", "));
-            $(".education-entry:last").append(formattedSchoolMajor);
+            if (majors.length > 0) {
+                var formattedSchoolMajor = HTMLschoolMajor.replace("%data%", mySchool.majors.join(", "));
+                $(".education-entry:last").append(formattedSchoolMajor);
+            }
         }
     }
 
@@ -354,39 +366,45 @@ function displayEducation() {
     var myOnlineCourses = education.onlineCourses;
 
     for (var onlineCourse in myOnlineCourses) {
-        var myOnlineCourse = myOnlineCourses[onlineCourse];
+        if (myOnlineCourses.hasOwnProperty(onlineCourse)) {
+            var myOnlineCourse = myOnlineCourses[onlineCourse];
 
-        // Creating online course div from template and adding it to the projects element
-        $("#education").append(HTMLschoolStart);
+            // Creating online course div from template and adding it to the projects element
+            $("#education").append(HTMLschoolStart);
 
-        var formattedOnlineTitle = ONLINE_COURSE_NAME_LINK.replace("%url%", myOnlineCourse.url).replace("%data%", myOnlineCourse.title);
-        var formattedOnlineSchool = HTMLonlineSchool.replace("%data%", myOnlineCourse.school);
-        $(".education-entry:last").append(formattedOnlineTitle + formattedOnlineSchool);
+            var formattedOnlineTitle = ONLINE_COURSE_NAME_LINK.replace("%url%", myOnlineCourse.url).replace("%data%", myOnlineCourse.title);
+            var formattedOnlineSchool = HTMLonlineSchool.replace("%data%", myOnlineCourse.school);
+            $(".education-entry:last").append(formattedOnlineTitle + formattedOnlineSchool);
 
-        var formattedOnlineDates = HTMLonlineDates.replace("%data%", myOnlineCourse.date);
-        $(".education-entry:last").append(formattedOnlineDates);
+            var formattedOnlineDates = HTMLonlineDates.replace("%data%", myOnlineCourse.date);
+            $(".education-entry:last").append(formattedOnlineDates);
 
-        var formattedOnlineURL = ONLINE_COURSE_LINK.replace(/%data%/g, myOnlineCourse.url);
-        $(".education-entry:last").append(formattedOnlineURL);
+            var formattedOnlineURL = ONLINE_COURSE_LINK.replace(/%data%/g, myOnlineCourse.url);
+            $(".education-entry:last").append(formattedOnlineURL);
+        }
     }
-}
+};
 
 // Function to display map
-function displayMap() {
+map.display = function() {
+    "use strict";
+
     // Adding map of locations
     $("#mapDiv").append(googleMap);
-}
+};
 
 // --- RENDER DATA ---
 
-// Initializing section objects array
-var sectionObjects = [bio, work, projects, education, map];
-
 // Executing each object's display function to create all the content.
-for (var sectionObject in sectionObjects) {
-    var displayFunction = sectionObjects[sectionObject].display;
+function runDisplay(element, index, array) {
+    var displayFunction = element.display;
+
+    console.log(typeof displayFunction);
 
     if (typeof displayFunction === "function") {
         displayFunction();
     }
 }
+
+// Initializing section objects array and executing display function on document ready
+[bio, work, projects, education, map].forEach(runDisplay);
