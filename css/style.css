@@ -27,7 +27,7 @@ h2 {
     font-size: 24px;
     color: #999;
     line-height: 29px;
-    padding: 10px;
+    padding: 10px 5% 10px 5%;
 }
 
 h3 {
@@ -35,6 +35,7 @@ h3 {
     font-size: 20px;
     color: #000;
     line-height: 22px;
+    padding: 10px 5% 10px 5%;
 }
 
 h4 {
@@ -42,15 +43,11 @@ h4 {
     font-size: 14px;
     color: #4a4a4a;
     line-height: 17px;
+    padding: 10px 5% 10px 5%;
 }
 
-h2,
-h3,
-h4,
 h5 {
-    padding: 10px;
-    padding-left: 5%;
-    padding-right: 5%;
+    padding: 10px 5% 10px 5%;
 }
 
 .date-text {
@@ -89,7 +86,7 @@ a {
     line-height: 28px;
 }
 
-#skillsH3 {
+.skills-header {
     color: #f5ae23;
     display: none;
 }
@@ -118,7 +115,7 @@ a {
 }
 /* TODO: Replace with image later */
 
-#header {
+.header {
     background-color: #484848;
 }
 
@@ -132,10 +129,7 @@ a {
 }
 
 .center-content {
-    padding-top: 2.5%;
-    padding-left: 5%;
-    padding-right: 5%;
-    padding-bottom: 2.5%
+    padding: 2.5% 5% 2.5% 5%;
 }
 
 ul {
@@ -169,12 +163,12 @@ span {
     padding: 5px;
 }
 
-#letsConnect {
+.lets-connect {
     text-align: center;
 }
 
 @media only screen and (max-width: 1024px) {
-    #letsConnect {
+    .lets-connect {
         margin-top: 5%;
     }
 }
@@ -186,7 +180,7 @@ span {
 }
 
 @media only screen and (max-width: 750px) {
-    #letsConnect {
+    .lets-connect {
         margin-top: 10%;
     }
     .biopic {
@@ -197,21 +191,21 @@ span {
     }
 }
 
-#map {
+.map {
     display: block;
     height: 100%;
     margin-left: 5%;
     margin-right: 5%;
 }
 
-#mapDiv {
+.map-container {
     height: 400px;
     width: 100%;
     padding-bottom: 5%;
 }
 
 @media only screen and (min-width: 750px) {
-    #skillsH3,
+    .skills-header,
     .biopic {
         display: block;
     }
